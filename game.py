@@ -1,6 +1,7 @@
 import time
-from engine.components.object import TextBox
-from engine.core import Game, GameScreen
+from ..term_engine.src.core import Game, GameScreen
+
+from term_engine.src.components.object import TextBox
 
 from bird import Bird
 from engine.metrics.duration import Duration, DurationMetrics
