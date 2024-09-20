@@ -1,10 +1,10 @@
 
 import random
 from typing import List
-from engine.components.object import Object
-from engine.effects.repeat_effect import RepeatEffect, RepeatType
-from engine.metrics.duration import Duration
-from pipe import BottomPipe, TopPipe
+from term_game_engine1.components.object import Object
+from term_game_engine1.effects.repeat_effect import RepeatEffect, RepeatType
+from term_game_engine1.metrics.duration import Duration
+from .pipe import BottomPipe, TopPipe
 
 
 class PipeSpawner(RepeatEffect):

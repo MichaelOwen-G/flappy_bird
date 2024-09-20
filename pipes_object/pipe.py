@@ -1,13 +1,13 @@
 from typing import override
-from engine.components.drawing import Drawing, DrawingStack
-from engine.components.object import CollidableObject
-from engine.effects.repeat_effect import RepeatCallbacksEffect, RepeatType
-from engine.metrics.duration import Duration, DurationMetrics
-from engine.metrics.vec2 import Vec2
+from term_game_engine1.components.drawing import Drawing, DrawingStack
+from term_game_engine1.components.object import CollidableObject
+from term_game_engine1.effects.repeat_effect import RepeatCallbacksEffect, RepeatType
+from term_game_engine1.metrics.duration import Duration, DurationMetrics
+from term_game_engine1.metrics.vec2 import Vec2
 
 
 ''' Drawings '''
-pipe_trunk = ['  |      \  ']
+pipe_trunk = ['  |      |  ']
 
 
 top_pipe_base = [
@@ -44,17 +44,16 @@ class Pipe(CollidableObject):
         # the height of the part of pipe to spawn
         pipe_height: int = kwargs.get('pipe_height', 0)
 
-        # get which base drawing to use and create it
-        if pipe_part == 'top':
-            pipeBase = Drawing(tag = "pipeBase", drawingStates = top_pipe_base)
-        else:
-            pipeBase = Drawing(tag = "pipeBase", drawingStates = bottom_pipe_base)
+        # create the relevant pipe base
+        pipeBase = Drawing(tag = "pipeBase",
+                           drawingStates = top_pipe_base if pipe_part == 'top' else bottom_pipe_base,
+                           )
 
         # create the pipe trunk drawing
-        pipeTrunk = Drawing(tag = "top-pipeTrunk", drawingStates = pipe_trunk)
+        pipeTrunk: Drawing = Drawing(tag = "top-pipeTrunk", drawingStates = pipe_trunk)
 
-        # create pipeDrawing stack
-        pipe = DrawingStack(tag = f'{pipe_part}_pipe', maxWidth = 0, maxHeight = 0)
+        # create pipeDrawing stack (pipe_base and pipe_trunk)
+        pipe: DrawingStack = DrawingStack(tag = f'{pipe_part}_pipe', maxWidth = 0, maxHeight = 0)
 
         # get number of pipe_trunk parts b
         trunk_len: int = pipe_height - pipeBase.maxHeight

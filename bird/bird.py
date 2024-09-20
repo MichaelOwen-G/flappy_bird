@@ -1,13 +1,12 @@
 
 import time
 from typing import override
-from engine.components.drawing import Drawing, DrawingStack
-from engine.components.object import CollidableObject, CollisionType, Object
-from engine.effects.repeat_effect import RepeatCallbacksEffect, RepeatType
-from engine.metrics.duration import Duration, DurationMetrics
-from engine.metrics.vec2 import Vec2
+from term_game_engine1.components.drawing import Drawing, DrawingStack
+from term_game_engine1.components.object import CollidableObject, CollisionType, Object
+from term_game_engine1.effects.repeat_effect import RepeatCallbacksEffect, RepeatType
+from term_game_engine1.metrics.duration import Duration, DurationMetrics
+from term_game_engine1.metrics.vec2 import Vec2
 
-import example_package_gachanja_project
 class Bird(CollidableObject):
     def __init__(self, x = 0, y = 0, tags: list[str] = [], priority = 0):
        
@@ -47,8 +46,8 @@ class Bird(CollidableObject):
         game = kwargs.get('game', None)
         
         # load sound
-        self.flap_sound = game.load_sound('flap.mp3')
-        self.hit_sound = game.load_sound('hit.mp3')
+        self.flap_sound = game.load_sound('sound/flap.mp3')
+        self.hit_sound = game.load_sound('sound/hit.mp3')
         
         ''' ANIMATIONS '''
         # add the fly animation effect
@@ -118,4 +117,3 @@ class Bird(CollidableObject):
         super().collide_with(other, collisionType)
         
         time.sleep(1)
-

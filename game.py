@@ -1,11 +1,11 @@
+import sys
 import time
-from ..term_engine.src.core import Game, GameScreen
+from term_game_engine1.core import Game, GameScreen
+from term_game_engine1.components.object import TextBox
+from term_game_engine1.metrics.duration import Duration, DurationMetrics
 
-from term_engine.src.components.object import TextBox
-
-from bird import Bird
-from engine.metrics.duration import Duration, DurationMetrics
-from pipe_spawner import PipeSpawner
+from bird.bird import Bird
+from pipes_object.pipe_spawner import PipeSpawner
 
 class MyGame(Game):
     def __init__(self):
@@ -20,9 +20,9 @@ class MyGame(Game):
 
         self.game_over_tag = 'game_over'
         
-        self.sound_track_path = 'sound_track.mp3'
+        self.sound_track_path = 'sound/sound_track.mp3'
         
-        self.fail_sound_path = 'die.mp3'
+        self.fail_sound_path = 'sound/die.mp3'
 
         super().__init__(width, height, debug_mode=debug_mode, frame_cap = frame_cap)
 
@@ -52,25 +52,15 @@ class MyGame(Game):
         if len(bird_res) == 0: return
 
         bird: Bird = bird_res[0]
-
-        # add points to the 
-        p_res = self.find_objects_by_tag('points')
-
-        if len(p_res) == 0: return
-
-        points = p_res[0]
-
-        # points.text = f'{bird.points} points'
-
-        if bird.dead:
-            self.sound_track.stop()
-            self.game_over_message()
-            self.fail_sound.play()
             
-            self.running = False
-
-        else:
-            self.remove_message()
+        print(bird)
+        print(bird.dead)
+            
+        print(f'GAME RUNNING {game.running}')
+        
+        print('\n\n\n')
+        
+        if bird.dead: game.running = False
 
         super().update(dt)
 
